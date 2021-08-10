@@ -1,0 +1,136 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2021-04-27 10:45:31.170637",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "member_id",
+  "member_name",
+  "company",
+  "opening_date",
+  "closing_date",
+  "department",
+  "closed",
+  "doc_status",
+  "subscription_plan_section",
+  "subscription_plan_table",
+  "total_member_contribution"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Name Series",
+   "options": "CON.{#####}",
+   "read_only": 1,
+   "set_only_once": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "member_id",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Member",
+   "options": "Member",
+   "reqd": 1,
+   "set_only_once": 1,
+   "unique": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "closed",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Closed"
+  },
+  {
+   "fieldname": "subscription_plan_section",
+   "fieldtype": "Section Break",
+   "label": "Monthly Subscription "
+  },
+  {
+   "fieldname": "subscription_plan_table",
+   "fieldtype": "Table",
+   "label": "Subscription Plan",
+   "options": "Member Contribution Plan Table"
+  },
+  {
+   "fieldname": "opening_date",
+   "fieldtype": "Date",
+   "label": "Open Date"
+  },
+  {
+   "fieldname": "closing_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Closing Date"
+  },
+  {
+   "fieldname": "member_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Member Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "total_member_contribution",
+   "fieldtype": "Currency",
+   "label": "Total Member Contribution"
+  },
+  {
+   "default": "0",
+   "fieldname": "doc_status",
+   "fieldtype": "Data",
+   "label": "Status",
+   "read_only": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1,
+   "set_only_once": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-04-30 10:46:33.921615",
+ "modified_by": "Administrator",
+ "module": "Non Profit",
+ "name": "Member Contribution Plan",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

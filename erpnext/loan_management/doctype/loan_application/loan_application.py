@@ -46,10 +46,8 @@ class LoanApplication(Document):
 			frappe.throw(_("Loan Amount exceeds maximum loan amount of {0} as per proposed securities").format(self.maximum_loan_amount))
 
 	def check_sanctioned_amount_limit(self):
+		total_loan_amount = get_total_loan_amount(self.applicant_type, self.applicant, self.company)
 		sanctioned_amount_limit = get_sanctioned_amount_limit(self.applicant_type, self.applicant, self.company)
-
-		if sanctioned_amount_limit:
-			total_loan_amount = get_total_loan_amount(self.applicant_type, self.applicant, self.company)
 
 		if sanctioned_amount_limit and flt(self.loan_amount) + flt(total_loan_amount) > flt(sanctioned_amount_limit):
 			frappe.throw(_("Sanctioned Amount limit crossed for {0} {1}").format(self.applicant_type, frappe.bold(self.applicant)))
@@ -199,7 +197,7 @@ def get_proposed_pledge(securities):
 			security.qty = cint(security.amount/security.loan_security_price)
 
 		security.amount = security.qty * security.loan_security_price
-		security.post_haircut_amount = cint(security.amount - (security.amount * security.haircut/100))
+		security.post_haircut_amount = security.amount - (security.amount * security.haircut/100)
 
 		maximum_loan_amount += security.post_haircut_amount
 
@@ -208,3 +206,27 @@ def get_proposed_pledge(securities):
 	proposed_pledges['maximum_loan_amount'] = maximum_loan_amount
 
 	return proposed_pledges
+
+@frappe.whitelist()
+def check_defaulter(applicant):
+	res = frappe.db.sql("""
+			SELECT
+				t1.loan,
+				t1.applicant,
+				t1.posting_date,
+				t1.pending_principal_amount,
+				t1.total_pending_interest_amount,
+				t2.name,
+				t2.loan_type,
+				t3.defaulter_days
+				FROM
+				`tabLoan Interest Accrual` t1
+				LEFT JOIN `tabLoan` t2 ON t2.name = t1.loan
+				LEFT JOIN `tabLoan Type` t3 ON t2.loan_type = t3.name
+				WHERE
+				t1.applicant = %(applicant)s
+				AND (t1.pending_principal_amount <> 0
+				OR t1.total_pending_interest_amount <> 0)
+		    """, {"applicant": applicant},as_dict=True)
+
+	return res

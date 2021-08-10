@@ -1,13 +1,13 @@
 {
  "actions": [],
- "autoname": "field:loan_name",
+ "autoname": "LT.########",
  "creation": "2019-08-29 18:08:38.159726",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "loan_name",
   "maximum_loan_amount",
+  "loan_type",
   "rate_of_interest",
   "penalty_interest_rate",
   "grace_period_in_days",
@@ -16,6 +16,7 @@
   "company",
   "is_term_loan",
   "disabled",
+  "defaulter_days",
   "description",
   "account_details_section",
   "mode_of_payment",
@@ -24,17 +25,13 @@
   "column_break_12",
   "interest_income_account",
   "penalty_income_account",
+  "required_documents_section",
+  "required_document_1",
+  "required_document_2",
+  "required_document_3",
   "amended_from"
  ],
  "fields": [
-  {
-   "fieldname": "loan_name",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Loan Name",
-   "reqd": 1,
-   "unique": 1
-  },
   {
    "fieldname": "maximum_loan_amount",
    "fieldtype": "Currency",
@@ -62,6 +59,7 @@
   {
    "fieldname": "description",
    "fieldtype": "Text",
+   "in_preview": 1,
    "label": "Description"
   },
   {
@@ -149,20 +147,60 @@
    "fieldtype": "Currency",
    "label": "Auto Write Off Amount ",
    "options": "Company:company:default_currency"
+  },
+  {
+   "fieldname": "required_documents_section",
+   "fieldtype": "Section Break",
+   "label": "Required Documents"
+  },
+  {
+   "fieldname": "required_document_1",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Required Document 1"
+  },
+  {
+   "fieldname": "required_document_2",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Required Document 2"
+  },
+  {
+   "fieldname": "required_document_3",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Required Document 3"
+  },
+  {
+   "fieldname": "defaulter_days",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Defaulter days",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "loan_type",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "label": "Loan Type",
+   "no_copy": 1,
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
- "is_submittable": 1,
  "links": [],
- "modified": "2021-04-19 18:10:57.368490",
+ "modified": "2021-06-22 10:42:48.437680",
  "modified_by": "Administrator",
  "module": "Loan Management",
  "name": "Loan Type",
  "owner": "Administrator",
  "permissions": [
   {
-   "amend": 1,
-   "cancel": 1,
    "create": 1,
    "delete": 1,
    "email": 1,
@@ -172,7 +210,6 @@
    "report": 1,
    "role": "Loan Manager",
    "share": 1,
-   "submit": 1,
    "write": 1
   },
   {

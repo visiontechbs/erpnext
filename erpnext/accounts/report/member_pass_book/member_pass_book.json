@@ -1,0 +1,41 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2021-06-08 21:47:37.700644",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "Against account",
+   "fieldtype": "Check",
+   "label": "Against",
+   "mandatory": 0,
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": "Xebec PO letter head",
+ "modified": "2021-06-09 00:30:46.091225",
+ "modified_by": "Administrator",
+ "module": "Accounts",
+ "name": "Member Pass Book",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "GL Entry",
+ "report_name": "Member Pass Book",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Accounts User"
+  },
+  {
+   "role": "Accounts Manager"
+  },
+  {
+   "role": "Auditor"
+  }
+ ]
+}

@@ -4,11 +4,11 @@
 {% include 'erpnext/loan_management/loan_common.js' %};
 
 frappe.ui.form.on('Loan', {
-	setup: function(frm) {
+	setup: function (frm) {
 		frm.make_methods = {
-			'Loan Disbursement': function() { frm.trigger('make_loan_disbursement') },
-			'Loan Security Unpledge': function() { frm.trigger('create_loan_security_unpledge') },
-			'Loan Write Off': function() { frm.trigger('make_loan_write_off_entry') }
+			'Loan Disbursement': function () { frm.trigger('make_loan_disbursement') },
+			'Loan Security Unpledge': function () { frm.trigger('create_loan_security_unpledge') },
+			'Loan Write Off': function () { frm.trigger('make_loan_write_off_entry') }
 		}
 	},
 	onload: function (frm) {
@@ -28,13 +28,12 @@ frappe.ui.form.on('Loan', {
 		frm.set_query("loan_type", function () {
 			return {
 				"filters": {
-					"docstatus": 1,
-					"company": frm.doc.company
+					"docstatus": 1
 				}
 			};
 		});
 
-		$.each(["penalty_income_account", "interest_income_account"], function(i, field) {
+		$.each(["penalty_income_account", "interest_income_account"], function (i, field) {
 			frm.set_query(field, function () {
 				return {
 					"filters": {
@@ -63,37 +62,37 @@ frappe.ui.form.on('Loan', {
 	refresh: function (frm) {
 		if (frm.doc.docstatus == 1) {
 			if (["Disbursed", "Partially Disbursed"].includes(frm.doc.status) && (!frm.doc.repay_from_salary)) {
-				frm.add_custom_button(__('Request Loan Closure'), function() {
+				frm.add_custom_button(__('Request Loan Closure'), function () {
 					frm.trigger("request_loan_closure");
-				},__('Status'));
+				}, __('Status'));
 
-				frm.add_custom_button(__('Loan Repayment'), function() {
+				frm.add_custom_button(__('Loan Repayment'), function () {
 					frm.trigger("make_repayment_entry");
-				},__('Create'));
+				}, __('Create'));
 			}
 
 			if (["Sanctioned", "Partially Disbursed"].includes(frm.doc.status)) {
-				frm.add_custom_button(__('Loan Disbursement'), function() {
+				frm.add_custom_button(__('Loan Disbursement'), function () {
 					frm.trigger("make_loan_disbursement");
-				},__('Create'));
+				}, __('Create'));
 			}
 
 			if (frm.doc.status == "Loan Closure Requested") {
-				frm.add_custom_button(__('Loan Security Unpledge'), function() {
+				frm.add_custom_button(__('Loan Security Unpledge'), function () {
 					frm.trigger("create_loan_security_unpledge");
-				},__('Create'));
+				}, __('Create'));
 			}
 
 			if (["Loan Closure Requested", "Disbursed", "Partially Disbursed"].includes(frm.doc.status)) {
-				frm.add_custom_button(__('Loan Write Off'), function() {
+				frm.add_custom_button(__('Loan Write Off'), function () {
 					frm.trigger("make_loan_write_off_entry");
-				},__('Create'));
+				}, __('Create'));
 			}
 		}
 		frm.trigger("toggle_fields");
 	},
 
-	loan_type: function(frm) {
+	loan_type: function (frm) {
 		frm.toggle_reqd("repayment_method", frm.doc.is_term_loan);
 		frm.toggle_display("repayment_method", frm.doc.is_term_loan);
 		frm.toggle_display("repayment_periods", frm.doc.is_term_loan);
@@ -120,7 +119,7 @@ frappe.ui.form.on('Loan', {
 		})
 	},
 
-	make_repayment_entry: function(frm) {
+	make_repayment_entry: function (frm) {
 		frappe.call({
 			args: {
 				"loan": frm.doc.name,
@@ -139,7 +138,7 @@ frappe.ui.form.on('Loan', {
 		})
 	},
 
-	make_loan_write_off_entry: function(frm) {
+	make_loan_write_off_entry: function (frm) {
 		frappe.call({
 			args: {
 				"loan": frm.doc.name,
@@ -155,15 +154,15 @@ frappe.ui.form.on('Loan', {
 		})
 	},
 
-	request_loan_closure: function(frm) {
+	request_loan_closure: function (frm) {
 		frappe.confirm(__("Do you really want to close this loan"),
-			function() {
+			function () {
 				frappe.call({
 					args: {
 						'loan': frm.doc.name
 					},
 					method: "erpnext.loan_management.doctype.loan.loan.request_loan_closure",
-					callback: function() {
+					callback: function () {
 						frm.reload_doc();
 					}
 				});
@@ -171,14 +170,14 @@ frappe.ui.form.on('Loan', {
 		);
 	},
 
-	create_loan_security_unpledge: function(frm) {
+	create_loan_security_unpledge: function (frm) {
 		frappe.call({
 			method: "erpnext.loan_management.doctype.loan.loan.unpledge_security",
-			args : {
+			args: {
 				"loan": frm.doc.name,
 				"as_dict": 1
 			},
-			callback: function(r) {
+			callback: function (r) {
 				if (r.message)
 					var doc = frappe.model.sync(r.message)[0];
 				frappe.set_route("Form", doc.doctype, doc.name);
@@ -187,7 +186,7 @@ frappe.ui.form.on('Loan', {
 	},
 
 	loan_application: function (frm) {
-		if(frm.doc.loan_application){
+		if (frm.doc.loan_application) {
 			return frappe.call({
 				method: "erpnext.loan_management.doctype.loan.loan.get_loan_application",
 				args: {
@@ -204,7 +203,7 @@ frappe.ui.form.on('Loan', {
 						});
 
 						if (frm.doc.is_secured_loan) {
-							$.each(r.message.proposed_pledges, function(i, d) {
+							$.each(r.message.proposed_pledges, function (i, d) {
 								let row = frm.add_child("securities");
 								row.loan_security = d.loan_security;
 								row.qty = d.qty;
@@ -215,10 +214,10 @@ frappe.ui.form.on('Loan', {
 
 							frm.refresh_fields("securities");
 						}
-                    }
-                }
-            });
-        }
+					}
+				}
+			});
+		}
 	},
 
 	repayment_method: function (frm) {
@@ -228,5 +227,52 @@ frappe.ui.form.on('Loan', {
 	toggle_fields: function (frm) {
 		frm.toggle_enable("monthly_repayment_amount", frm.doc.repayment_method == "Repay Fixed Amount per Period")
 		frm.toggle_enable("repayment_periods", frm.doc.repayment_method == "Repay Over Number of Periods")
+	},
+
+	// +AU - VTBS-61 -  Restrict Loan approva for defaulter
+	validate: function (frm) {
+
+		frappe.call({
+			args: {
+				"applicant": frm.doc.applicant
+			},
+			method: "erpnext.loan_management.doctype.loan.loan.check_defaulter",
+			callback: function (r) {
+				if (r.message.length > 0) {
+					console.log(r.message);
+					var i = 0;
+					var is_defaulter = 0;
+
+					for (i; i < r.message.length; i++) {
+						//set todaty date
+						var today = new Date();
+
+						// reduce 'defaulter_days' from 'today'
+						today.setDate(today.getDate() - r.message[i].defaulter_days);
+						console.log(r.message[i].defaulter_days);
+						console.log(today);
+						//formate date as 'yyyy-mm-dd'
+						var due_date = moment(today).format('YYYY-MM-DD');
+						console.log(due_date);
+
+						//check there is defaulter by comparing 'Loan Interest Accrual - postinng date' and due_date
+						if (due_date > r.message[i].posting_date) {
+							//if above condition is true, exit from the loop (it is enough to have just a one record)
+							console.log("over");
+							is_defaulter = 1;
+							break;
+						}
+					}
+
+					// if it is defualtter, cancle the submission
+					if(is_defaulter == 1){
+						console.log("over1");
+						frappe.validated = false;
+
+						frappe.msgprint(__("This applicant has already defaulted loan(s).Hence cannot proceed a new loan"));
+					}
+				}
+			}
+		})
 	}
 });

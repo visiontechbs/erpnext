@@ -12,7 +12,9 @@
   "column_break_3",
   "loan_security_type",
   "unit_of_measure",
-  "disabled"
+  "disabled",
+  "loan_guarantor_details_section",
+  "loan_guarantor_details"
  ],
  "fields": [
   {
@@ -63,11 +65,21 @@
    "options": "UOM",
    "read_only": 1,
    "reqd": 1
+  },
+  {
+   "fieldname": "loan_guarantor_details_section",
+   "fieldtype": "Section Break",
+   "label": "Loan Guarantor Details"
+  },
+  {
+   "fieldname": "loan_guarantor_details",
+   "fieldtype": "Table",
+   "options": "Loan Guarantor Details"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2020-10-26 07:34:48.601766",
+ "modified": "2021-05-06 12:29:53.976011",
  "modified_by": "Administrator",
  "module": "Loan Management",
  "name": "Loan Security",

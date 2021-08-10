@@ -1,0 +1,67 @@
+{
+ "add_total_row": 1,
+ "columns": [
+  {
+   "fieldname": "first_name",
+   "fieldtype": "Data",
+   "label": "Name",
+   "width": 0
+  },
+  {
+   "fieldname": "disabled",
+   "fieldtype": "Check",
+   "label": "Active",
+   "width": 0
+  }
+ ],
+ "creation": "2021-06-20 19:59:36.201583",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "first_name",
+   "fieldtype": "Link",
+   "label": "Name",
+   "mandatory": 1,
+   "wildcard_filter": 1
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": "ETP fund",
+ "modified": "2021-06-20 20:40:22.953509",
+ "modified_by": "Administrator",
+ "module": "Selling",
+ "name": "Active Customer List",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "%(customer)s",
+ "ref_doctype": "Customer",
+ "report_name": "Active Customer List ",
+ "report_type": "Query Report",
+ "roles": [
+  {
+   "role": "Sales User"
+  },
+  {
+   "role": "Sales Manager"
+  },
+  {
+   "role": "Sales Master Manager"
+  },
+  {
+   "role": "Stock User"
+  },
+  {
+   "role": "Stock Manager"
+  },
+  {
+   "role": "Accounts User"
+  },
+  {
+   "role": "Accounts Manager"
+  }
+ ]
+}

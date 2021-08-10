@@ -1,0 +1,60 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2021-04-21 12:55:10.694136",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "member_id",
+  "member_added_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "member_id",
+   "fieldtype": "Link",
+   "label": "Member ID",
+   "options": "Member"
+  },
+  {
+   "fieldname": "member_added_date",
+   "fieldtype": "Table",
+   "label": "Member Added Date",
+   "options": "Customers List In Member"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Naming Series",
+   "options": "CUS.#####"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-04-23 17:17:36.948611",
+ "modified_by": "Administrator",
+ "module": "Non Profit",
+ "name": "Member Department",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

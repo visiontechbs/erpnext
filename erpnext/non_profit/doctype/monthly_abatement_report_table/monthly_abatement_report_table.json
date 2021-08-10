@@ -1,0 +1,176 @@
+{
+ "actions": [],
+ "creation": "2021-05-12 14:09:58.310669",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "department",
+  "department_name",
+  "member",
+  "member_name",
+  "payroll_number",
+  "subscription_1",
+  "subscription_2",
+  "subscription_3",
+  "subscription_4",
+  "subscription_5",
+  "subscription_6",
+  "subscription_7",
+  "loan_amount_1",
+  "loan_amount_2",
+  "loan_amount_3",
+  "loan_amount_4",
+  "loan_total_amount",
+  "total_deductions",
+  "credit_account_list"
+ ],
+ "fields": [
+  {
+   "fieldname": "department",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Department"
+  },
+  {
+   "fieldname": "department_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Department Name"
+  },
+  {
+   "fieldname": "member",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Member ",
+   "options": "Member"
+  },
+  {
+   "fieldname": "member_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Member Name"
+  },
+  {
+   "fieldname": "payroll_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Payroll Number"
+  },
+  {
+   "fieldname": "subscription_1",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Subscription 1",
+   "options": "Subscription Plan"
+  },
+  {
+   "fieldname": "subscription_2",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Subscription 2",
+   "options": "Subscription Plan"
+  },
+  {
+   "fieldname": "subscription_3",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Subscription 3",
+   "options": "Subscription Plan"
+  },
+  {
+   "fieldname": "subscription_4",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Subscription 4",
+   "options": "Subscription Plan"
+  },
+  {
+   "fieldname": "subscription_5",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Subscription 5",
+   "options": "Subscription Plan"
+  },
+  {
+   "fieldname": "subscription_6",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Subscription 6",
+   "options": "Subscription Plan"
+  },
+  {
+   "fieldname": "subscription_7",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Subscription 7",
+   "options": "Subscription Plan"
+  },
+  {
+   "fieldname": "total_deductions",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Total Deductions"
+  },
+  {
+   "fieldname": "credit_account_list",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Credit Account List"
+  },
+  {
+   "fieldname": "loan_total_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Loan Total Amount"
+  },
+  {
+   "fieldname": "loan_amount_1",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Loan Amount 1"
+  },
+  {
+   "fieldname": "loan_amount_2",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Loan Amount 2"
+  },
+  {
+   "fieldname": "loan_amount_3",
+   "fieldtype": "Currency",
+   "label": "Loan Amount 3"
+  },
+  {
+   "fieldname": "loan_amount_4",
+   "fieldtype": "Currency",
+   "label": "Loan Amount 4"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2021-06-28 12:42:40.177827",
+ "modified_by": "Administrator",
+ "module": "Non Profit",
+ "name": "Monthly Abatement Report Table",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

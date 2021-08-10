@@ -4,12 +4,15 @@
 
 from __future__ import unicode_literals
 import frappe
+import logging
 from frappe import _
+from datetime import datetime
 from frappe.model.document import Document
 from frappe.contacts.address_and_contact import load_address_and_contact
-from frappe.utils import cint, get_link_to_form
+from frappe.utils import cint
 from frappe.integrations.utils import get_payment_gateway_controller
 from erpnext.non_profit.doctype.membership_type.membership_type import get_membership_type
+from frappe.utils import nowdate
 
 class Member(Document):
 	def onload(self):
@@ -26,10 +29,9 @@ class Member(Document):
 		validate_email_address(email.strip(), True)
 
 	def setup_subscription(self):
-		non_profit_settings = frappe.get_doc('Non Profit Settings')
-		if not non_profit_settings.enable_razorpay_for_memberships:
-			frappe.throw(_('Please check Enable Razorpay for Memberships in {0} to setup subscription')).format(
-				get_link_to_form('Non Profit Settings', 'Non Profit Settings'))
+		membership_settings = frappe.get_doc("Membership Settings")
+		if not membership_settings.enable_razorpay:
+			frappe.throw("Please enable Razorpay to setup subscription")
 
 		controller = get_payment_gateway_controller("Razorpay")
 		settings = controller.get_settings({})
@@ -41,7 +43,7 @@ class Member(Document):
 
 		subscription_details = {
 			"plan_id": plan_id,
-			"billing_frequency": cint(non_profit_settings.billing_frequency),
+			"billing_frequency": cint(membership_settings.billing_frequency),
 			"customer_notify": 1
 		}
 
@@ -53,7 +55,6 @@ class Member(Document):
 
 		return subscription
 
-	@frappe.whitelist()
 	def make_customer_and_link(self):
 		if self.customer:
 			frappe.msgprint(_("A customer is already linked to this Member"))
@@ -84,9 +85,7 @@ def create_member(user_details):
 		"email_id": user_details.email,
 		"pan_number": user_details.pan or None,
 		"membership_type": user_details.plan_id,
-		"customer_id": user_details.customer_id or None,
-		"subscription_id": user_details.subscription_id or None,
-		"subscription_status": user_details.subscription_status or ""
+		"subscription_id": user_details.subscription_id or None
 	})
 
 	member.insert(ignore_permissions=True)
@@ -182,3 +181,34 @@ def register_member(fullname, email, rzpay_plan_id, subscription_id, pan=None, m
 		))
 
 		return member.name
+		
+# +AU - VTBS-48
+@frappe.whitelist()
+def update_member_department(member_id, customer):
+	member_department = frappe.db.exists("Member Department", {'member_id': member_id })
+	if member_department:
+		try:
+			doc_name = frappe.db.sql("""SELECT b.name FROM `tabMember Department` b WHERE b.member_id = %s""",(member_id),as_dict=1)
+			doc_name = doc_name[0]
+			doc_name = str(doc_name['name'])
+			parent_doc = frappe.get_doc("Member Department", doc_name)
+			parent_doc.append("member_added_date", {
+				"customer_name" : customer,
+				"added_date" : nowdate()
+			})
+			parent_doc.save()
+			frappe.msgprint(('Member Customer Successfully Updated'))
+		except:
+			frappe.msgprint(('Member Customer Not Successfully Updated'))
+	else:
+		try:
+			parent_doc = frappe.new_doc("Member Department")
+			parent_doc.member_id = member_id
+			parent_doc.append("member_added_date", {
+				"customer_name": customer,
+				"added_date": nowdate()
+			})
+			parent_doc.save(ignore_permissions=True)
+			frappe.msgprint(('Member Customer Created successfully'))
+		except:
+			frappe.msgprint(('Member Customer not Created'))

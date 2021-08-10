@@ -5,6 +5,101 @@
 
 frappe.ui.form.on('Loan Application', {
 
+	// +AU - VTBS-61 -  Restrict Loan approva for defaulter
+	status: function (frm) {
+		if (frm.doc.status == "Approved") {
+			frappe.call({
+				args: {
+					"applicant": frm.doc.applicant
+				},
+				method: "erpnext.loan_management.doctype.loan_application.loan_application.check_defaulter",
+				callback: function (r) {
+					if (r.message.length > 0) {
+						console.log(r.message);
+						var i = 0;
+						var is_defaulter = 0;
+
+						for (i; i < r.message.length; i++) {
+							//set todaty date
+							var today = new Date();
+
+							// reduce 'defaulter_days' from 'today'
+							today.setDate(today.getDate() - r.message[i].defaulter_days);
+							console.log(r.message[i].defaulter_days);
+							console.log(today);
+							//formate date as 'yyyy-mm-dd'
+							var due_date = moment(today).format('YYYY-MM-DD');
+							console.log(due_date);
+
+							//check there is defaulter by comparing 'Loan Interest Accrual - postinng date' and due_date
+							if (due_date > r.message[i].posting_date) {
+								//if above condition is true, exit from the loop (it is enough to have just a one record)
+								console.log("over");
+								is_defaulter = 1;
+								break;
+							}
+						}
+
+						// if it is defualtter, cancle the submission
+						if (is_defaulter == 1) {
+							console.log("over1");
+							frm.doc.status = "Open";
+							frm.refresh_field('status');
+
+							frappe.msgprint(__("This applicant has already defaulted loan(s).Hence cannot approve this loan"));
+						}
+					}
+				}
+			})
+		}	
+	},
+	validate: function (frm) {
+		if (frm.doc.status == "Approved") {
+			frappe.call({
+				args: {
+					"applicant": frm.doc.applicant
+				},
+				method: "erpnext.loan_management.doctype.loan_application.loan_application.check_defaulter",
+				callback: function (r) {
+					if (r.message.length > 0) {
+						console.log(r.message);
+						var i = 0;
+						var is_defaulter = 0;
+
+						for (i; i < r.message.length; i++) {
+							//set todaty date
+							var today = new Date();
+
+							// reduce 'defaulter_days' from 'today'
+							today.setDate(today.getDate() - r.message[i].defaulter_days);
+							console.log(r.message[i].defaulter_days);
+							console.log(today);
+							//formate date as 'yyyy-mm-dd'
+							var due_date = moment(today).format('YYYY-MM-DD');
+							console.log(due_date);
+
+							//check there is defaulter by comparing 'Loan Interest Accrual - postinng date' and due_date
+							if (due_date > r.message[i].posting_date) {
+								//if above condition is true, exit from the loop (it is enough to have just a one record)
+								console.log("over");
+								is_defaulter = 1;
+								break;
+							}
+						}
+
+						// if it is defualtter, cancle the submission
+						if (is_defaulter == 1) {
+							console.log("over1");
+							frappe.validated = false;
+
+							frappe.msgprint(__("This applicant has already defaulted loan(s).Hence cannot approve this loan"));
+						}
+					}
+				}
+			})
+		}
+	},//END OF +AU
+
 	setup: function(frm) {
 		frm.make_methods = {
 			'Loan': function() { frm.trigger('create_loan') },
@@ -14,13 +109,6 @@ frappe.ui.form.on('Loan Application', {
 	refresh: function(frm) {
 		frm.trigger("toggle_fields");
 		frm.trigger("add_toolbar_buttons");
-		frm.set_query('loan_type', () => {
-			return {
-				filters: {
-					company: frm.doc.company
-				}
-			};
-		});
 	},
 	repayment_method: function(frm) {
 		frm.doc.repayment_amount = frm.doc.repayment_periods = ""

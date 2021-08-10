@@ -7,10 +7,10 @@
  "engine": "InnoDB",
  "field_order": [
   "party_type",
-  "party",
-  "cb_1",
-  "company",
   "status",
+  "cb_1",
+  "party",
+  "member",
   "subscription_period",
   "start_date",
   "end_date",
@@ -36,7 +36,6 @@
   "additional_discount_percentage",
   "additional_discount_amount",
   "sb_3",
-  "submit_invoice",
   "invoices",
   "accounting_dimensions_section",
   "cost_center",
@@ -52,7 +51,6 @@
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
-   "no_copy": 1,
    "options": "\nTrialling\nActive\nPast Due Date\nCancelled\nUnpaid\nCompleted",
    "read_only": 1
   },
@@ -250,21 +248,14 @@
    "options": "Cost Center"
   },
   {
-   "fieldname": "company",
+   "fieldname": "member",
    "fieldtype": "Link",
-   "label": "Company",
-   "options": "Company"
-  },
-  {
-   "default": "1",
-   "fieldname": "submit_invoice",
-   "fieldtype": "Check",
-   "label": "Submit Invoice Automatically"
+   "label": "Member",
+   "options": "Member"
   }
  ],
- "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-04-19 15:24:27.550797",
+ "modified": "2021-04-21 17:35:51.796946",
  "modified_by": "Administrator",
  "module": "Accounts",
  "name": "Subscription",
