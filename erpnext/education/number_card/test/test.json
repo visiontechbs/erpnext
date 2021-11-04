@@ -1,0 +1,22 @@
+{
+ "creation": "2021-03-02 12:26:19.131034",
+ "docstatus": 0,
+ "doctype": "Number Card",
+ "filters_json": "{\"company\":\"ABC Company\",\"fiscal_year\":\"2021\",\"from_date\":\"2021-01-01\",\"to_date\":\"2021-12-31\",\"with_period_closing_entry\":1,\"show_unclosed_fy_pl_balances\":1,\"include_default_book_entries\":1}",
+ "function": "Count",
+ "idx": 0,
+ "is_public": 0,
+ "is_standard": 1,
+ "label": "test",
+ "modified": "2021-03-02 12:26:19.300111",
+ "modified_by": "gayan@visiontechbs.com",
+ "module": "Education",
+ "name": "test",
+ "owner": "gayan@visiontechbs.com",
+ "report_field": "opening_debit",
+ "report_function": "Sum",
+ "report_name": "Trial Balance",
+ "show_percentage_stats": 1,
+ "stats_time_interval": "Daily",
+ "type": "Report"
+}

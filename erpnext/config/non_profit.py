@@ -86,6 +86,10 @@ def get_data():
 					"type": "doctype",
 					"name": "Loan"
 				},
+				{
+					"type": "doctype",
+					"name": "Member Contribution Plan"
+				},
 			]
 		},
 		{
@@ -95,6 +99,15 @@ def get_data():
 					"type": "doctype",
 					"name": "Grant Application",
 					"description": _("Grant information."),
+				}
+			]
+		},
+		{
+			"label": _("Member Contribution Plan"),
+			"items": [
+				{
+					"type": "doctype",
+					"name": "Member Contribution Plan",
 				}
 			]
 		}

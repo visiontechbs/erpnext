@@ -206,6 +206,9 @@ def request_loan_closure(loan, posting_date=None):
 		write_off = make_loan_write_off(loan)
 		write_off.submit()
 		frappe.db.set_value('Loan', loan, 'status', 'Loan Closure Requested')
+	# Added by AU:2021.04.21	
+	elif pending_amount == 0.0:
+		 frappe.db.set_value('Loan', loan, 'status', 'Loan Closure Requested')
 	else:
 		frappe.throw(_("Cannot close loan as there is an outstanding of {0}").format(pending_amount))
 
@@ -320,6 +323,30 @@ def unpledge_security(loan=None, loan_security_pledge=None, security_map=None, a
 		return unpledge_request
 	else:
 		return unpledge_request
+
+@frappe.whitelist()
+def check_defaulter(applicant):
+	res = frappe.db.sql("""
+			SELECT
+				t1.loan,
+				t1.applicant,
+				t1.posting_date,
+				t1.pending_principal_amount,
+				t1.total_pending_interest_amount,
+				t2.name,
+				t2.loan_type,
+				t3.defaulter_days
+				FROM
+				`tabLoan Interest Accrual` t1
+				LEFT JOIN `tabLoan` t2 ON t2.name = t1.loan
+				LEFT JOIN `tabLoan Type` t3 ON t2.loan_type = t3.name
+				WHERE
+				t1.applicant = %(applicant)s
+				AND (t1.pending_principal_amount <> 0
+				OR t1.total_pending_interest_amount <> 0)
+		    """, {"applicant": applicant},as_dict=True)
+
+	return res
 
 def create_loan_security_unpledge(unpledge_map, loan, company, applicant_type, applicant):
 	unpledge_request = frappe.new_doc("Loan Security Unpledge")

@@ -11,6 +11,9 @@
   },
   {
    "card": "Student Applicants to Review"
+  },
+  {
+   "card": "test"
   }
  ],
  "charts": [
@@ -54,8 +57,8 @@
  "idx": 0,
  "is_default": 0,
  "is_standard": 1,
- "modified": "2020-08-05 16:22:17.428101",
- "modified_by": "Administrator",
+ "modified": "2021-03-02 12:26:19.329478",
+ "modified_by": "gayan@visiontechbs.com",
  "module": "Education",
  "name": "Education",
  "owner": "Administrator"

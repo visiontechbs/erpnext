@@ -10,7 +10,8 @@ app_color = "#e74c3c"
 app_email = "info@erpnext.com"
 app_license = "GNU General Public License (v3)"
 source_link = "https://github.com/frappe/erpnext"
-app_logo_url = '/assets/erpnext/images/erp-icon.svg'
+#app_logo_url = '/assets/erpnext/images/erp-icon123.svg'
+app_logo_url = '/assets/erpnext/images/LeadsERPLogo.png'
 
 
 develop_version = '13.x.x-develop'
@@ -255,8 +256,7 @@ doc_events = {
 			"erpnext.regional.italy.utils.sales_invoice_on_cancel",
 			"erpnext.erpnext_integrations.taxjar_integration.delete_transaction"
 		],
-		"on_trash": "erpnext.regional.check_deletion_permission",
-		"validate": ["erpnext.regional.india.utils.update_taxable_values"]
+		"on_trash": "erpnext.regional.check_deletion_permission"
 	},
 	"Purchase Invoice": {
 		"validate": [
@@ -301,9 +301,13 @@ auto_cancel_exempted_doctypes= [
 
 scheduler_events = {
 	"cron": {
+		"*/1 * * * *": [
+			"erpnext.non_profit.doctype.member_contribution_plan.member_contribution_plan.set_expired_status",
+		],
 		"0/30 * * * *": [
 			"erpnext.utilities.doctype.video.video.update_youtube_data",
 		]
+		
 	},
 	"all": [
 		"erpnext.projects.doctype.project.project.project_status_update_reminder",
@@ -320,8 +324,7 @@ scheduler_events = {
 		"erpnext.projects.doctype.project.project.collect_project_status",
 		"erpnext.hr.doctype.shift_type.shift_type.process_auto_attendance_for_all_shifts",
 		"erpnext.support.doctype.issue.issue.set_service_level_agreement_variance",
-		"erpnext.erpnext_integrations.connectors.shopify_connection.sync_old_orders",
-		"erpnext.stock.doctype.repost_item_valuation.repost_item_valuation.repost_entries"
+		"erpnext.erpnext_integrations.connectors.shopify_connection.sync_old_orders"
 	],
 	"daily": [
 		"erpnext.stock.reorder_item.reorder_item",
@@ -349,7 +352,8 @@ scheduler_events = {
 		"erpnext.healthcare.doctype.patient_appointment.patient_appointment.update_appointment_status",
 		"erpnext.buying.doctype.supplier_quotation.supplier_quotation.set_expired_status",
 		"erpnext.accounts.doctype.process_statement_of_accounts.process_statement_of_accounts.send_auto_email",
-		"erpnext.non_profit.doctype.membership.membership.set_expired_status"
+		"erpnext.non_profit.doctype.membership.membership.set_expired_status",
+		"erpnext.assets.doctype.member_contribution_plan.member_contribution_plan.make_post_gl_entry",
 	],
 	"daily_long": [
 		"erpnext.setup.doctype.email_digest.email_digest.send",
@@ -359,13 +363,13 @@ scheduler_events = {
 		"erpnext.hr.utils.generate_leave_encashment",
 		"erpnext.hr.utils.allocate_earned_leaves",
 		"erpnext.hr.utils.grant_leaves_automatically",
-		"erpnext.loan_management.doctype.process_loan_security_shortfall.process_loan_security_shortfall.create_process_loan_security_shortfall",
-		"erpnext.loan_management.doctype.process_loan_interest_accrual.process_loan_interest_accrual.process_loan_interest_accrual_for_term_loans",
+		"erpnext.loan_management.doctype.loan_security_shortfall.loan_security_shortfall.create_process_loan_security_shortfall",
+		"erpnext.loan_management.doctype.loan_interest_accrual.loan_interest_accrual.process_loan_interest_accrual_for_term_loans",
 		"erpnext.crm.doctype.lead.lead.daily_open_lead"
 	],
 	"monthly_long": [
 		"erpnext.accounts.deferred_revenue.process_deferred_accounting",
-		"erpnext.loan_management.doctype.process_loan_interest_accrual.process_loan_interest_accrual.process_loan_interest_accrual_for_demand_loans"
+		"erpnext.loan_management.doctype.loan_interest_accrual.loan_interest_accrual.process_loan_interest_accrual_for_demand_loans"
 	]
 }
 

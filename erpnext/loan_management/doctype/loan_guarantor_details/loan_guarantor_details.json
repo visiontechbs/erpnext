@@ -1,0 +1,58 @@
+{
+ "actions": [],
+ "creation": "2021-05-06 12:27:17.127381",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "loan_guarantor",
+  "guarantor_name",
+  "address",
+  "contact_number"
+ ],
+ "fields": [
+  {
+   "fieldname": "loan_guarantor",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Loan Guarantor",
+   "options": "Contact",
+   "reqd": 1
+  },
+  {
+   "fieldname": "guarantor_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Guarantor Name"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Address"
+  },
+  {
+   "fieldname": "contact_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Contact Number"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2021-05-06 12:53:41.169574",
+ "modified_by": "Administrator",
+ "module": "Loan Management",
+ "name": "Loan Guarantor Details",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

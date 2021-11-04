@@ -31,7 +31,8 @@
   "repayment_periods",
   "repayment_amount",
   "total_payable_interest",
-  "amended_from"
+  "amended_from",
+  "email_id"
  ],
  "fields": [
   {
@@ -210,11 +211,20 @@
    "fieldtype": "Check",
    "label": "Is Term Loan",
    "read_only": 1
+  },
+  {
+   "bold": 1,
+   "fieldname": "email_id",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Email Address",
+   "options": "Email"
   }
  ],
  "is_submittable": 1,
  "links": [],
- "modified": "2020-03-01 10:21:44.413353",
+ "modified": "2021-05-20 13:02:17.089602",
  "modified_by": "Administrator",
  "module": "Loan Management",
  "name": "Loan Application",

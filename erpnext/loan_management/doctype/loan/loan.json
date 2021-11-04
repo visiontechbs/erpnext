@@ -47,7 +47,10 @@
   "column_break_19",
   "total_interest_payable",
   "total_amount_paid",
-  "amended_from"
+  "amended_from",
+  "section_break_18",
+  "required_document",
+  "qualification_criteria"
  ],
  "fields": [
   {
@@ -348,12 +351,32 @@
    "no_copy": 1,
    "options": "Company:company:default_currency",
    "read_only": 1
+  },
+  {
+   "fieldname": "required_document",
+   "fieldtype": "Text Editor",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Required Document Types"
+  },
+  {
+   "fieldname": "section_break_18",
+   "fieldtype": "Section Break",
+   "in_preview": 1,
+   "label": "Required Details"
+  },
+  {
+   "fieldname": "qualification_criteria",
+   "fieldtype": "Text Editor",
+   "in_list_view": 1,
+   "in_preview": 1,
+   "label": "Qualification Criteria"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2020-11-24 12:27:23.208240",
+ "modified": "2021-06-04 01:13:52.131788",
  "modified_by": "Administrator",
  "module": "Loan Management",
  "name": "Loan",

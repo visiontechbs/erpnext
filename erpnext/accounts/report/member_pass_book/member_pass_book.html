@@ -1,0 +1,44 @@
+
+<table class="table table-bordered">
+    <tbody>
+        {% for(var j=0, row=filters.previous_book_row_no; j<row; j++) { %} <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            </tr>
+            {% } %}
+        {% for(var i=0, l=data.length; i<l; i++) { %} <tr>
+            {% if(data[i].posting_date) { %}
+            <td>{%= frappe.datetime.str_to_user(data[i].posting_date) %}</td>
+            <td>
+                <br>{%= data[i].gl_entry %}
+            </td>
+            <td>
+                {% if(!(filters.party || filters.account)) { %}
+                        {%= data[i].party || data[i].account %}
+                        <br>
+                {% } %}
+
+                {{ __("Against") }}: {%= data[i].against %}
+                <br>{%= __("Remarks") %}: {%= data[i].remarks %}
+                {% if(data[i].bill_no) { %}
+                <br>{%= __("Supplier Invoice No") %}: {%= data[i].bill_no %}
+                {% } %}
+            </td>
+            <td style="text-align: right">
+                {%= format_currency(data[i].debit, filters.presentation_currency) %}</td>
+            <td style="text-align: right">
+                {%= format_currency(data[i].credit, filters.presentation_currency) %}</td>
+                <td style="text-align: right">
+                    {%= format_currency(data[i].balance, filters.presentation_currency) %}
+                </td>
+            {% } %}
+            </tr>
+            {% } %}
+    </tbody>
+</table>
+<p class="text-right text-muted">Printed On {%= frappe.datetime.str_to_user(frappe.datetime.get_datetime_as_string()) %}
+</p>

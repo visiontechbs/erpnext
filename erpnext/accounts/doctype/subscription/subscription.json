@@ -10,6 +10,7 @@
   "status",
   "cb_1",
   "party",
+  "member",
   "subscription_period",
   "start_date",
   "end_date",
@@ -245,10 +246,16 @@
    "fieldtype": "Link",
    "label": "Cost Center",
    "options": "Cost Center"
+  },
+  {
+   "fieldname": "member",
+   "fieldtype": "Link",
+   "label": "Member",
+   "options": "Member"
   }
  ],
  "links": [],
- "modified": "2020-06-25 10:52:52.265105",
+ "modified": "2021-04-21 17:35:51.796946",
  "modified_by": "Administrator",
  "module": "Accounts",
  "name": "Subscription",

@@ -14,6 +14,7 @@
   "title",
   "naming_series",
   "customer",
+  "territory1",
   "customer_name",
   "order_type",
   "skip_delivery_note",
@@ -1474,13 +1475,21 @@
    "label": "Represents Company",
    "options": "Company",
    "read_only": 1
+  },
+  {
+   "fetch_from": "customer.territory",
+   "fieldname": "territory1",
+   "fieldtype": "Data",
+   "in_preview": 1,
+   "label": "Territory",
+   "translatable": 1
   }
  ],
  "icon": "fa fa-file-text",
  "idx": 105,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-01-20 23:40:39.929296",
+ "modified": "2021-06-15 11:41:36.609613",
  "modified_by": "Administrator",
  "module": "Selling",
  "name": "Sales Order",

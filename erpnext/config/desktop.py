@@ -7,6 +7,16 @@ def get_data():
 	return [
 		# Modules
 		{
+			"module_name": "Petty CAsh",
+			"category": "Modules",
+			"label": _("Getting Started"),
+			"color": "#1abc9c",
+			"icon": "fa fa-check-square-o",
+			"type": "module",
+			"description": "Dive into the basics for your organisation's needs.",
+			"onboard_present": 1
+		},
+		{
 			"module_name": "Getting Started",
 			"category": "Modules",
 			"label": _("Getting Started"),

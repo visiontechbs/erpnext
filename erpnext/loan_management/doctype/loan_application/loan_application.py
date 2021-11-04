@@ -206,3 +206,27 @@ def get_proposed_pledge(securities):
 	proposed_pledges['maximum_loan_amount'] = maximum_loan_amount
 
 	return proposed_pledges
+
+@frappe.whitelist()
+def check_defaulter(applicant):
+	res = frappe.db.sql("""
+			SELECT
+				t1.loan,
+				t1.applicant,
+				t1.posting_date,
+				t1.pending_principal_amount,
+				t1.total_pending_interest_amount,
+				t2.name,
+				t2.loan_type,
+				t3.defaulter_days
+				FROM
+				`tabLoan Interest Accrual` t1
+				LEFT JOIN `tabLoan` t2 ON t2.name = t1.loan
+				LEFT JOIN `tabLoan Type` t3 ON t2.loan_type = t3.name
+				WHERE
+				t1.applicant = %(applicant)s
+				AND (t1.pending_principal_amount <> 0
+				OR t1.total_pending_interest_amount <> 0)
+		    """, {"applicant": applicant},as_dict=True)
+
+	return res

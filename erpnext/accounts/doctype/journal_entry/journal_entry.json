@@ -12,6 +12,7 @@
   "title",
   "voucher_type",
   "naming_series",
+  "abatement_entry",
   "finance_book",
   "column_break1",
   "from_template",
@@ -498,13 +499,23 @@
    "options": "Journal Entry Template",
    "print_hide": 1,
    "report_hide": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "abatement_entry",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Abatement Entry",
+   "no_copy": 1,
+   "set_only_once": 1
   }
  ],
  "icon": "fa fa-file-text",
  "idx": 176,
  "is_submittable": 1,
  "links": [],
- "modified": "2020-10-30 13:56:01.121995",
+ "modified": "2021-06-23 12:34:18.773737",
  "modified_by": "Administrator",
  "module": "Accounts",
  "name": "Journal Entry",
